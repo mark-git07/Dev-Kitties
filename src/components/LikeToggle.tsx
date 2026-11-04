@@ -14,13 +14,7 @@ export function LikeToggle({
     return (
         <button 
             className="group"
-            onClick={() => {
-                if (liked.includes(id)) {
-                    setLiked(liked.filter((likedId) => likedId !== id));
-                } else {
-                    setLiked([...liked, id]);
-                }
-            }}
+            onClick={() => { liked.includes(id) ? setLiked(liked.filter((likedId) => likedId !== id)) : setLiked([...liked, id]) }}
         >
             <Heart className={
                     liked.includes(id)
