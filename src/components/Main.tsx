@@ -4,8 +4,12 @@ import List from "./List";
 import Form from "./Form";
 
 import { kitties } from "../data/kitties";
+import { useState } from "react";
+import type { Kitty } from "../types";
 
 function Main() {
+    const [liked, setLiked] = useState<Kitty["id"][]>([1, 3]);
+
     return (
         <>
             {/* Search & Shortlist */}
@@ -16,7 +20,7 @@ function Main() {
                <Shortlist />
             </div>
             {/* Kitten list */}
-            <List kitties={kitties} />
+            <List kitties={kitties} liked={liked} setLiked={setLiked} />
             {/* New Kitten form */}
             <Form />
         </>
