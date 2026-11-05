@@ -1,7 +1,22 @@
+import type { Dispatch, SetStateAction } from "react";
 import { Heart } from "lucide-react";
-import { X } from "lucide-react";
+import { ShortlistCard } from "./ShortlistCard";
+import { type Kitty } from "../types";
 
-function Shortlist() {
+function Shortlist({ 
+    kitties,
+    liked,
+    setLiked
+    } : {
+        kitties: Kitty[],
+        liked: Kitty["id"][],
+        setLiked: Dispatch<SetStateAction<Kitty["id"][]>> 
+    }) {
+
+    const isLiked = kitties.filter(
+        kitty => liked.includes(kitty.id)
+    );
+
     return (
         <>
             <div>
@@ -10,32 +25,9 @@ function Shortlist() {
                     <Heart className="fill-pink-500 stroke-none" />
                 </h2>
                 <ul className="mt-4 flex flex-wrap gap-4">
-                    <li className="relative flex items-center overflow-clip rounded-md bg-white shadow-sm ring ring-black/5 transition duration-100 starting:scale-0 starting:opacity-0">
-                    <img
-                        height={32}
-                        width={32}
-                        alt="Chase"
-                        className="aspect-square w-8 object-cover"
-                        src="/images/2.jpeg"
-                    />
-                    <p className="px-3 text-sm text-slate-800">Chase</p>
-                    <button className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100">
-                        <X className="size-4 stroke-slate-400 group-hover:stroke-red-400"/>
-                    </button>
-                    </li>
-                    <li className="relative flex items-center overflow-clip rounded-md bg-white shadow-sm ring ring-black/5 transition duration-100 starting:scale-0 starting:opacity-0">
-                    <img
-                        height={32}
-                        width={32}
-                        alt="Leia"
-                        className="aspect-square w-8 object-cover"
-                        src="/images/3.jpeg"
-                    />
-                    <p className="px-3 text-sm text-slate-800">Leia</p>
-                    <button className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100">
-                        <X className="size-4 stroke-slate-400 group-hover:stroke-red-400"/>
-                    </button>
-                    </li>
+                    { isLiked.map( 
+                        (kitty) => (<ShortlistCard id={kitty.id} kitty={kitty} liked={liked} setLiked={setLiked} />) 
+                    )}
                 </ul>
                 </div>
         </>
