@@ -17,7 +17,7 @@ function Main() {
                 {/* Search */}
                 <Search />
                 {/* Shortlist */}
-               <Shortlist />
+                <Shortlist kitties={kitties} liked={liked} setLiked={setLiked}/>
             </div>
             {/* Kitten list */}
             <List kitties={kitties} liked={liked} setLiked={setLiked} />
